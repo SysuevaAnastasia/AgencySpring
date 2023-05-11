@@ -1,5 +1,0 @@
-DROP TABLE Agency CASCADE;
-
-DROP TABLE KpopGroup CASCADE;
-
-DROP TABLE Member;
