@@ -1,4 +1,4 @@
-package dao;
+package repository;
 
 import entity.Member;
 import mapper.MemberMapper;
@@ -13,11 +13,11 @@ import java.sql.PreparedStatement;
 import java.util.List;
 
 @Repository
-public class MemberDAO {
+public class MemberRepository {
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public MemberDAO(JdbcTemplate jdbcTemplate) {
+    public MemberRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

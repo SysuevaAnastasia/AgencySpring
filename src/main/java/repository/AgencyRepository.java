@@ -1,4 +1,4 @@
-package dao;
+package repository;
 
 import entity.Agency;
 import mapper.AgencyMapper;
@@ -12,11 +12,11 @@ import java.sql.PreparedStatement;
 import java.util.List;
 
 @Repository
-public class AgencyDAO {
+public class AgencyRepository {
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public AgencyDAO(JdbcTemplate jdbcTemplate) {
+    public AgencyRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

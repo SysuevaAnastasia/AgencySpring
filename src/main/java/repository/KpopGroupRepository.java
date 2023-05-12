@@ -1,4 +1,4 @@
-package dao;
+package repository;
 
 import entity.KpopGroup;
 import mapper.KpopGroupMapper;
@@ -13,11 +13,11 @@ import java.sql.PreparedStatement;
 import java.util.List;
 
 @Repository
-public class KpopGroupDAO {
+public class KpopGroupRepository {
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public KpopGroupDAO(JdbcTemplate jdbcTemplate) {
+    public KpopGroupRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
