@@ -33,7 +33,6 @@ public class AgencyCRUDTest {
         agencyRepository.delete(id);
 
     }
-
     @Test
     public void insert() {
         //when
@@ -47,7 +46,6 @@ public class AgencyCRUDTest {
         assertEquals(expectedSelectQuery, actualSelectQuery);
         agencyRepository.delete(id);
     }
-
     @Test
     public void update() {
         //given
@@ -60,7 +58,6 @@ public class AgencyCRUDTest {
         assertEquals(expectedSelectQuery, actualSelectQuery);
         agencyRepository.delete(agency.getAgencyId());
     }
-
     @Test
     public void delete() {
         //given

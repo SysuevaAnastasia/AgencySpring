@@ -11,7 +11,6 @@ import java.util.List;
 public class AgencyService {
     @Autowired
     private AgencyRepository agencyRepository;
-
     public List<Agency> getAll() {
         return agencyRepository.getAll();
     }

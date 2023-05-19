@@ -23,7 +23,6 @@ public class Config {
     @Autowired
     private Environment environment;
 
-
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(environment.getRequiredProperty("driver"));

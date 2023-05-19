@@ -15,8 +15,6 @@ CREATE TABLE Agency
     CONSTRAINT Agency_pkey PRIMARY KEY (agencyId)
 );
 
-
-
 CREATE TABLE KpopGroup
 (
     groupId serial8,

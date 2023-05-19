@@ -11,7 +11,6 @@ import java.util.List;
 public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
-
     public List<Member> getAll() {
         return memberRepository.getAll();
     }

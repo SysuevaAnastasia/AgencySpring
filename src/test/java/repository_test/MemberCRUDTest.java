@@ -45,7 +45,6 @@ public class MemberCRUDTest {
         kpopGroupRepository.delete(groupId);
         agencyRepository.delete(agencyId);
     }
-
     @Test
     public void insert() {
         Agency agency = agencyRepository.getById(agencyRepository.insert(KpopAgencyTestsData.SUNNY));
@@ -65,7 +64,6 @@ public class MemberCRUDTest {
         kpopGroupRepository.delete(kpopGroup.getGroupId());
         agencyRepository.delete(agency.getAgencyId());
     }
-
     @Test
     public void update() {
         //given
@@ -85,7 +83,6 @@ public class MemberCRUDTest {
         kpopGroupRepository.delete(kpopGroup.getGroupId());
         agencyRepository.delete(agency.getAgencyId());
     }
-
     @Test
     public void MemberDeleteIdTest() {
         //given
