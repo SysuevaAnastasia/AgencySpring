@@ -22,22 +22,22 @@ public class MemberRepository {
     }
 
     public List<Member> getAll() {
-        String sql = "select \"memberId\", \"name\", \"surname\", \"nickname\", \"telephoneNumber\", \"birth\", \"position\", \"groupIdFk\" from \"Member\"";
+        String sql = "select \"memberid\", \"name\", \"surname\", \"nickname\", \"telephonenumber\", \"birth\", \"position\", \"groupidfk\" from \"member\"";
         return jdbcTemplate.query(sql, new MemberMapper());
     }
 
     public Member getById(Long memberId) {
-        String sql = "select \"memberId\", \"name\", \"surname\", \"nickname\", \"telephoneNumber\", \"birth\", \"position\", \"groupIdFk\" from \"Member\" where \"memberId\" = ?";
+        String sql = "select \"memberid\", \"name\", \"surname\", \"nickname\", \"telephonenumber\", \"birth\", \"position\", \"groupidfk\" from \"member\" where \"memberid\" = ?";
         return jdbcTemplate.queryForObject(sql, new MemberMapper(), memberId);
     }
 
     public Long insert(Member member) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        String sql = "insert into \"Member\" (\"name\"," +
-                "\"surname\", \"nickname\", \"telephoneNumber\", \"birth\", \"position\", \"groupIdFk\") values (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into \"member\" (\"name\"," +
+                "\"surname\", \"nickname\", \"telephonenumber\", \"birth\", \"position\", \"groupidfk\") values (?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(con -> {
             PreparedStatement preparedStatement = con.
-                    prepareStatement(sql);
+                    prepareStatement(sql, new String[]{"memberid"});
             preparedStatement.setString(1, member.getName());
             preparedStatement.setString(2, member.getSurname());
             preparedStatement.setString(3, member.getNickname());
@@ -51,8 +51,8 @@ public class MemberRepository {
     }
 
     public String update(Member member) {
-        String sql = "update \"Member\" set \"name\" = ?," +
-                "\"surname\" = ?, \"nickname\" = ?, \"telephoneNumber\" = ?, \"birth\" = ?, \"position\" = ?, \"groupIdFk\" = ? where \"memberId\" = ?";
+        String sql = "update \"member\" set \"name\" = ?," +
+                "\"surname\" = ?, \"nickname\" = ?, \"telephonenumber\" = ?, \"birth\" = ?, \"position\" = ?, \"groupidfk\" = ? where \"memberid\" = ?";
         int count = jdbcTemplate.update(sql,
                 member.getName(),
                 member.getSurname(),
@@ -69,7 +69,7 @@ public class MemberRepository {
     }
 
     public String delete(Long memberId) {
-        String sql = "delete from \"Member\" where \"memberId\" = ?";
+        String sql = "delete from \"member\" where \"memberid\" = ?";
         int count = jdbcTemplate.update(sql, memberId);
         if (count > 0) {
             return "delete success";

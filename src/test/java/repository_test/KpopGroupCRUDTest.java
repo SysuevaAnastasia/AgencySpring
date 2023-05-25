@@ -4,7 +4,7 @@ import configuration.Config;
 import data.KpopAgencyTestsData;
 import entity.Agency;
 import entity.KpopGroup;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -38,6 +38,7 @@ public class KpopGroupCRUDTest {
         kpopGroupRepository.delete(groupId);
         agencyRepository.delete(agencyId);
     }
+
     @Test
     public void insert() {
         Agency agency = agencyRepository.getById(agencyRepository.insert(KpopAgencyTestsData.SUNNY));
@@ -45,15 +46,15 @@ public class KpopGroupCRUDTest {
         //when
         Long actualSelectQuery = kpopGroupRepository.insert(KpopAgencyTestsData.TXT);
         KpopGroup kpopGroup = kpopGroupRepository.getById(actualSelectQuery);
-        Long id = kpopGroup.getGroupId();
         //given
-        Long expectedSelectQuery = id;
+        Long id = kpopGroup.getGroupId();
 
         //then
-        assertEquals(expectedSelectQuery, actualSelectQuery);
+        assertEquals(id, actualSelectQuery);
         kpopGroupRepository.delete(id);
         agencyRepository.delete(agency.getAgencyId());
     }
+
     @Test
     public void update() {
         //given
@@ -69,6 +70,7 @@ public class KpopGroupCRUDTest {
         kpopGroupRepository.delete(kpopGroup.getGroupId());
         agencyRepository.delete(agency.getAgencyId());
     }
+
     @Test
     public void delete() {
         //given

@@ -8,7 +8,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import repository.AgencyRepository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -33,19 +32,20 @@ public class AgencyCRUDTest {
         agencyRepository.delete(id);
 
     }
+
     @Test
     public void insert() {
         //when
         Long actualSelectQuery = agencyRepository.insert(KpopAgencyTestsData.SUNNY);
         Agency agency = agencyRepository.getById(actualSelectQuery);
-        Long id = agency.getAgencyId();
         //given
-        Long expectedSelectQuery = id;
+        Long id = agency.getAgencyId();
 
         //then
-        assertEquals(expectedSelectQuery, actualSelectQuery);
+        assertEquals(id, actualSelectQuery);
         agencyRepository.delete(id);
     }
+
     @Test
     public void update() {
         //given
@@ -58,6 +58,7 @@ public class AgencyCRUDTest {
         assertEquals(expectedSelectQuery, actualSelectQuery);
         agencyRepository.delete(agency.getAgencyId());
     }
+
     @Test
     public void delete() {
         //given

@@ -5,7 +5,7 @@ import data.KpopAgencyTestsData;
 import entity.Agency;
 import entity.KpopGroup;
 import entity.Member;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -45,6 +45,7 @@ public class MemberCRUDTest {
         kpopGroupRepository.delete(groupId);
         agencyRepository.delete(agencyId);
     }
+
     @Test
     public void insert() {
         Agency agency = agencyRepository.getById(agencyRepository.insert(KpopAgencyTestsData.SUNNY));
@@ -54,16 +55,16 @@ public class MemberCRUDTest {
         //when
         Long actualSelectQuery = memberRepository.insert(KpopAgencyTestsData.FELIX);
         Member member = memberRepository.getById(actualSelectQuery);
-        Long id = member.getMemberId();
         //given
-        Long expectedSelectQuery = id;
+        Long id = member.getMemberId();
 
         //then
-        assertEquals(expectedSelectQuery, actualSelectQuery);
+        assertEquals(id, actualSelectQuery);
         memberRepository.delete(id);
         kpopGroupRepository.delete(kpopGroup.getGroupId());
         agencyRepository.delete(agency.getAgencyId());
     }
+
     @Test
     public void update() {
         //given
@@ -83,8 +84,9 @@ public class MemberCRUDTest {
         kpopGroupRepository.delete(kpopGroup.getGroupId());
         agencyRepository.delete(agency.getAgencyId());
     }
+
     @Test
-    public void MemberDeleteIdTest() {
+    public void delete() {
         //given
         String expectedSelectQuery = "delete success";
         Agency agency = agencyRepository.getById(agencyRepository.insert(KpopAgencyTestsData.SUNNY));

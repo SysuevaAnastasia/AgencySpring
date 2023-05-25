@@ -9,7 +9,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import repository.AgencyRepository;
 import repository.KpopGroupRepository;
 import repository.MemberRepository;
@@ -17,7 +16,6 @@ import repository.MemberRepository;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableWebMvc
 @PropertySource("classpath:config.properties")
 public class Config {
     @Autowired
@@ -57,7 +55,7 @@ public class Config {
         ClassicConfiguration config = new ClassicConfiguration();
         config.setBaselineOnMigrate(true);
         config.setDataSource(dataSource());
-        config.setLocationsAsStrings("src/main/resources/db/migration/V1_init_tables.sql");
+        config.setLocationsAsStrings("classpath:db/migration");
         return new Flyway(config);
     }
 }

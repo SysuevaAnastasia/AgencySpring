@@ -22,22 +22,22 @@ public class KpopGroupRepository {
     }
 
     public List<KpopGroup> getAll() {
-        String sql = "select \"groupId\", \"groupName\", \"dataStartContract\", \"dataEndContract\", \"managerName\", \"agencyIdFk\" from \"KpopGroup\"";
+        String sql = "select \"groupid\", \"groupname\", \"datastartcontract\", \"dataendcontract\", \"managername\", \"agencyidfk\" from \"kpopgroup\"";
         return jdbcTemplate.query(sql, new KpopGroupMapper());
     }
 
     public KpopGroup getById(Long groupId) {
-        String sql = "select \"groupId\", \"groupName\", \"dataStartContract\", \"dataEndContract\", \"managerName\", \"agencyIdFk\" from \"KpopGroup\" where \"groupId\" = ?";
+        String sql = "select \"groupid\", \"groupname\", \"datastartcontract\", \"dataendcontract\", \"managername\", \"agencyidfk\" from \"kpopgroup\" where \"groupid\" = ?";
         return jdbcTemplate.queryForObject(sql, new KpopGroupMapper(), groupId);
     }
 
     public Long insert(KpopGroup group) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        String sql = "insert into \"KpopGroup\" (\"groupName\"," +
-                "\"dataStartContract\", \"dataEndContract\", \"managerName\", \"agencyIdFk\") values (?, ?, ?, ?, ?)";
+        String sql = "insert into \"kpopgroup\" (\"groupname\"," +
+                "\"datastartcontract\", \"dataendcontract\", \"managername\", \"agencyidfk\") values (?, ?, ?, ?, ?)";
         jdbcTemplate.update(con -> {
             PreparedStatement preparedStatement = con.
-                    prepareStatement(sql);
+                    prepareStatement(sql, new String[]{"groupid"});
             preparedStatement.setString(1, group.getGroupName());
             preparedStatement.setDate(2, Date.valueOf(group.getDataStartContract()));
             preparedStatement.setDate(3, Date.valueOf(group.getDataEndContract()));
@@ -49,8 +49,8 @@ public class KpopGroupRepository {
     }
 
     public String update(KpopGroup group) {
-        String sql = "update \"KpopGroup\" set \"groupName\" = ?," +
-                "\"dataStartContract\" = ?, \"dataEndContract\" = ?, \"managerName\" = ?, \"agencyIdFk\" = ? where \"groupId\" = ?";
+        String sql = "update \"kpopgroup\" set \"groupname\" = ?," +
+                "\"datastartcontract\" = ?, \"dataendcontract\" = ?, \"managername\" = ?, \"agencyidfk\" = ? where \"groupid\" = ?";
         int count = jdbcTemplate.update(sql,
                 group.getGroupName(),
                 group.getDataStartContract(),
@@ -65,7 +65,7 @@ public class KpopGroupRepository {
     }
 
     public String delete(Long groupId) {
-        String sql = "delete from \"KpopGroup\" where \"groupId\" = ?";
+        String sql = "delete from \"kpopgroup\" where \"groupid\" = ?";
         int count = jdbcTemplate.update(sql, groupId);
         if (count > 0) {
             return "delete success";
