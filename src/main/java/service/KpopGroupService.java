@@ -9,8 +9,12 @@ import java.util.List;
 
 @Service
 public class KpopGroupService {
+    private final KpopGroupRepository kpopGroupRepository;
+
     @Autowired
-    private KpopGroupRepository kpopGroupRepository;
+    public KpopGroupService(KpopGroupRepository kpopGroupRepository) {
+        this.kpopGroupRepository = kpopGroupRepository;
+    }
 
     public List<KpopGroup> getAll() {
         return kpopGroupRepository.getAll();
