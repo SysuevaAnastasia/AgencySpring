@@ -1,7 +1,7 @@
 package service_test;
 
 import entity.KpopGroup;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-class KpopGroupServiceTest {
+public class KpopGroupServiceTest {
 
     private static final Long ID = 5L;
     public static final String GROUP_NAME = "RWK";
@@ -28,7 +28,7 @@ class KpopGroupServiceTest {
 
 
     @Test
-    void getById() {
+    public void getById() {
         KpopGroupRepository kpopGroupRepository = Mockito.mock(KpopGroupRepository.class);
         when(kpopGroupRepository.getById(ID)).thenReturn(KPOPGROUP);
         KpopGroupService kpopGroupService = new KpopGroupService(kpopGroupRepository);
@@ -41,7 +41,7 @@ class KpopGroupServiceTest {
     }
 
     @Test
-    void insert() {
+    public void insert() {
         KpopGroupRepository kpopGroupRepository = Mockito.mock(KpopGroupRepository.class);
         when(kpopGroupRepository.insert(KPOPGROUP)).thenReturn(ID);
         KpopGroupService kpopGroupService = new KpopGroupService(kpopGroupRepository);
@@ -50,7 +50,7 @@ class KpopGroupServiceTest {
     }
 
     @Test
-    void update() {
+    public void update() {
         KpopGroupRepository kpopGroupRepository = Mockito.mock(KpopGroupRepository.class);
         when(kpopGroupRepository.update(KPOPGROUP)).thenReturn(UPDATE_SUCCESS);
         KpopGroupService kpopGroupService = new KpopGroupService(kpopGroupRepository);
@@ -59,7 +59,7 @@ class KpopGroupServiceTest {
     }
 
     @Test
-    void delete() {
+    public void delete() {
         KpopGroupRepository kpopGroupRepository = Mockito.mock(KpopGroupRepository.class);
         when(kpopGroupRepository.delete(ID)).thenReturn(DELETE_SUCCESS);
         KpopGroupService kpopGroupService = new KpopGroupService(kpopGroupRepository);

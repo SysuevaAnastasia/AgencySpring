@@ -1,7 +1,7 @@
 package service_test;
 
 import entity.Member;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-class MemberServiceTest {
+public class MemberServiceTest {
     private static final Long ID = 5L;
     public static final String NAME = "Gu";
     public static final String SURNAME = "Tu";
@@ -29,7 +29,7 @@ class MemberServiceTest {
     private static final String DELETE_SUCCESS = "delete success";
 
     @Test
-    void getById() {
+    public void getById() {
         MemberRepository memberRepository = Mockito.mock(MemberRepository.class);
         when(memberRepository.getById(ID)).thenReturn(MEMBER);
         MemberService memberService = new MemberService(memberRepository);
@@ -44,7 +44,7 @@ class MemberServiceTest {
     }
 
     @Test
-    void insert() {
+    public void insert() {
         MemberRepository memberRepository = Mockito.mock(MemberRepository.class);
         when(memberRepository.insert(MEMBER)).thenReturn(ID);
         MemberService memberService = new MemberService(memberRepository);
@@ -53,7 +53,7 @@ class MemberServiceTest {
     }
 
     @Test
-    void update() {
+    public void update() {
         MemberRepository memberRepository = Mockito.mock(MemberRepository.class);
         when(memberRepository.update(MEMBER)).thenReturn(UPDATE_SUCCESS);
         MemberService memberService = new MemberService(memberRepository);
@@ -62,7 +62,7 @@ class MemberServiceTest {
     }
 
     @Test
-    void delete() {
+    public void delete() {
         MemberRepository memberRepository = Mockito.mock(MemberRepository.class);
         when(memberRepository.delete(ID)).thenReturn(DELETE_SUCCESS);
         MemberService memberService = new MemberService(memberRepository);

@@ -1,9 +1,11 @@
 package configuration;
 
+import controller.AgencyController;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.configuration.ClassicConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -12,11 +14,13 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import repository.AgencyRepository;
 import repository.KpopGroupRepository;
 import repository.MemberRepository;
+import service.AgencyService;
 
 import javax.sql.DataSource;
 
 @Configuration
 @PropertySource("classpath:config.properties")
+@ComponentScan("controller")
 public class Config {
     @Autowired
     private Environment environment;
@@ -57,5 +61,15 @@ public class Config {
         config.setDataSource(dataSource());
         config.setLocationsAsStrings("classpath:db/migration");
         return new Flyway(config);
+    }
+
+    @Bean
+    public AgencyService agencyService() {
+        return new AgencyService(agencyRepository());
+    }
+
+    @Bean
+    public AgencyController agencyController() {
+        return new AgencyController(agencyService());
     }
 }

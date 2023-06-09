@@ -1,7 +1,7 @@
 package service_test;
 
 import entity.Agency;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-class AgencyServiceTest {
+public class AgencyServiceTest {
 
     public static final String AGENCY_NAME = "WerNy";
     public static final String DIRECTOR_NAME = "Fy Ty";
@@ -24,7 +24,7 @@ class AgencyServiceTest {
     private static final String DELETE_SUCCESS = "delete success";
 
     @Test
-    void getById() {
+    public void getById() {
         AgencyRepository agencyRepository = Mockito.mock(AgencyRepository.class);
         when(agencyRepository.getById(ID)).thenReturn(AGENCY);
         AgencyService agencyService = new AgencyService(agencyRepository);
@@ -36,7 +36,7 @@ class AgencyServiceTest {
     }
 
     @Test
-    void insert() {
+    public void insert() {
         AgencyRepository agencyRepository = Mockito.mock(AgencyRepository.class);
         when(agencyRepository.insert(AGENCY)).thenReturn(ID);
         AgencyService agencyService = new AgencyService(agencyRepository);
@@ -45,7 +45,7 @@ class AgencyServiceTest {
     }
 
     @Test
-    void update() {
+    public void update() {
         AgencyRepository agencyRepository = Mockito.mock(AgencyRepository.class);
         when(agencyRepository.update(AGENCY)).thenReturn(UPDATE_SUCCESS);
         AgencyService agencyService = new AgencyService(agencyRepository);
@@ -54,7 +54,7 @@ class AgencyServiceTest {
     }
 
     @Test
-    void delete() {
+    public void delete() {
         AgencyRepository agencyRepository = Mockito.mock(AgencyRepository.class);
         when(agencyRepository.delete(ID)).thenReturn(DELETE_SUCCESS);
         AgencyService agencyService = new AgencyService(agencyRepository);
