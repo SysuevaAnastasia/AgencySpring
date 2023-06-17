@@ -1,4 +1,4 @@
-import configuration.Config;
+import configuration.WebConf;
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.Wrapper;
@@ -14,7 +14,7 @@ public class AgencyLauncher {
         tomcat.getConnector();
 
         AnnotationConfigWebApplicationContext appContext = new AnnotationConfigWebApplicationContext();
-        appContext.register(Config.class);
+        appContext.register(WebConf.class);
 
         DispatcherServlet dispatcherServlet = new DispatcherServlet(appContext);
 

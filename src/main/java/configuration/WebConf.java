@@ -11,6 +11,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import repository.AgencyRepository;
 import repository.KpopGroupRepository;
@@ -21,7 +22,10 @@ import javax.sql.DataSource;
 
 @Configuration
 @PropertySource("classpath:config.properties")
-public class Config {
+@ComponentScan("controller")
+@EnableAsync
+@EnableWebMvc
+public class WebConf {
     @Autowired
     private Environment environment;
 
@@ -66,5 +70,10 @@ public class Config {
     @Bean
     public AgencyService agencyService() {
         return new AgencyService(agencyRepository());
+    }
+
+    @Bean
+    public AgencyController agencyController() {
+        return new AgencyController(agencyService());
     }
 }

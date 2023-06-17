@@ -7,6 +7,10 @@ public class Agency {
     private String telephoneNumber;
     private String address;
 
+    public Agency() {
+
+    }
+
     public Agency(Long agencyId, String agencyName, String directorName, String telephoneNumber, String address) {
         this.agencyId = agencyId;
         this.agencyName = agencyName;

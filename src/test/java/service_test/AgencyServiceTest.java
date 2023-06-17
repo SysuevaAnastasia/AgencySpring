@@ -8,6 +8,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import repository.AgencyRepository;
 import service.AgencyService;
 
+import java.util.concurrent.ExecutionException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -36,29 +38,29 @@ public class AgencyServiceTest {
     }
 
     @Test
-    public void insert() {
+    public void insert() throws ExecutionException, InterruptedException {
         AgencyRepository agencyRepository = Mockito.mock(AgencyRepository.class);
         when(agencyRepository.insert(AGENCY)).thenReturn(ID);
         AgencyService agencyService = new AgencyService(agencyRepository);
-        Long id = agencyService.insert(AGENCY);
+        Long id = agencyService.insert(AGENCY).get();
         assertEquals(id, ID);
     }
 
     @Test
-    public void update() {
+    public void update() throws ExecutionException, InterruptedException {
         AgencyRepository agencyRepository = Mockito.mock(AgencyRepository.class);
         when(agencyRepository.update(AGENCY)).thenReturn(UPDATE_SUCCESS);
         AgencyService agencyService = new AgencyService(agencyRepository);
-        String resultString = agencyService.update(AGENCY);
+        String resultString = agencyService.update(AGENCY).get();
         assertEquals(resultString, UPDATE_SUCCESS);
     }
 
     @Test
-    public void delete() {
+    public void delete() throws ExecutionException, InterruptedException {
         AgencyRepository agencyRepository = Mockito.mock(AgencyRepository.class);
         when(agencyRepository.delete(ID)).thenReturn(DELETE_SUCCESS);
         AgencyService agencyService = new AgencyService(agencyRepository);
-        String resultString = agencyService.delete(ID);
+        String resultString = agencyService.delete(ID).get();
         assertEquals(resultString, DELETE_SUCCESS);
     }
 }

@@ -4,15 +4,15 @@ import entity.Agency;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import service.AgencyService;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RestController
-@RequestMapping("/agency")
+@RequestMapping(value = "/agency")
 public class AgencyController {
     private final Logger logger = LoggerFactory.getLogger(AgencyController.class);
     private final AgencyService agencyService;
@@ -22,7 +22,7 @@ public class AgencyController {
         this.agencyService = agencyService;
     }
 
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<List<Agency>> listAllAgency() {
         List<Agency> agencies = agencyService.getAll();
         if (agencies.isEmpty()) {
@@ -43,14 +43,14 @@ public class AgencyController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Long> addAgency(@RequestBody Agency agency) {
-        Long id = agencyService.insert(agency);
+    public ResponseEntity<Long> addAgency(@RequestBody Agency agency) throws ExecutionException, InterruptedException {
+        Long id = agencyService.insert(agency).get();
         return ResponseEntity.ok().body(id);
     }
 
     @PutMapping("/change")
-    public ResponseEntity<String> updateAgency(@RequestBody Agency agency) {
-        String result = agencyService.update(agency);
+    public ResponseEntity<String> updateAgency(@RequestBody Agency agency) throws ExecutionException, InterruptedException {
+        String result = agencyService.update(agency).get();
         if (result.equals("")) {
             logger.warn("No update such agency");
             return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
@@ -59,8 +59,8 @@ public class AgencyController {
     }
 
     @DeleteMapping("delete/{agencyId}")
-    public ResponseEntity<String> deleteAgency(@PathVariable("agencyId") Long agencyId) {
-        String result = agencyService.delete(agencyId);
+    public ResponseEntity<String> deleteAgency(@PathVariable("agencyId") Long agencyId) throws ExecutionException, InterruptedException {
+        String result = agencyService.delete(agencyId).get();
         if (result.equals("")) {
             logger.warn("No delete such agency with id: " + agencyId);
             return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
